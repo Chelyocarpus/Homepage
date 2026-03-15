@@ -1,92 +1,323 @@
-  .icon::before {
-    display: flex;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-	margin-top: -5px;
-	margin-bottom: -5px;
-	margin-right: 10px;
-	font-size: 30px;
-  }
-
-  .fa-linkedin::before {
-    font-family: "Font Awesome 5 Brands"; font-weight: 100; content: "\f08c";
-  }
-  
-  .fa-github:before{
-	  font-family: "Font Awesome 5 Brands"; font-weight: 100; content:"\f09b"
-	  }
-
-main {
-	background-attachment: scroll;
-	background-image: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4)), url('../../assets/images/bg.jpg');
-	background-position: 0% 0%, center;
-	background-repeat: repeat, no-repeat;
-	background-size: auto, cover;
-	
-	font-family: 'Lato';
-
+/* ============================================
+   CSS Custom Properties
+   ============================================ */
+:root {
+  --accent:         rgba(210, 185, 140, 0.95);
+  --accent-dim:     rgba(210, 185, 140, 0.35);
+  --text-primary:   rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.55);
+  --card-bg:        rgba(6, 6, 12, 0.60);
+  --card-border:    rgba(255, 255, 255, 0.09);
+  --link-bg:        rgba(255, 255, 255, 0.06);
+  --link-bg-hover:  rgba(255, 255, 255, 0.11);
+  --divider:        rgba(255, 255, 255, 0.11);
+  --card-shadow:    0 40px 100px rgba(0, 0, 0, 0.65), 0 8px 28px rgba(0, 0, 0, 0.45);
+  --font-display:   'Playfair Display', Georgia, serif;
+  --font-body:      'DM Sans', system-ui, sans-serif;
+  --radius-card:    16px;
+  --radius-link:    8px;
+  --transition:     0.18s ease;
 }
 
+/* ============================================
+   Base
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================
+   Page Wrapper / Background
+   ============================================ */
+.page-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background-image:
+    linear-gradient(
+      160deg,
+      rgba(4,  4, 10, 0.94) 0%,
+      rgba(16,  8, 26, 0.80) 35%,
+      rgba( 6, 14, 22, 0.86) 65%,
+      rgba(4,  4, 10, 0.97) 100%
+    ),
+    url('../images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+/* ============================================
+   Card
+   ============================================ */
+.card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--card-bg);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  padding: 48px 44px 44px;
+  box-shadow: var(--card-shadow);
+  animation: cardReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Profile Photo
+   ============================================ */
+.profile-photo {
+  display: block;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 28px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 0 0 5px var(--accent-dim),
+    0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
 h1 {
-	font-size: 52px;
-	text-align: center;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  text-align: center;
+  margin: 0 0 18px;
+  color: var(--text-primary);
+  line-height: 1.2;
 }
 
-.flex-item a {
-	display: flex;
-	align-items: center;
-	color: hsla(0,0%,100%,.8);
-	text-decoration: none;
-	background-color: hsla(0,0%,100%,.1);
-	padding: 16px;
-	margin: 8px -8px;
-	-webkit-transition: all .1s linear;
-	transition: all .1s linear;
-	border-radius: 4px;
+/* ============================================
+   Text
+   ============================================ */
+.bio {
+  font-size: 0.93rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0;
 }
 
-.flex-item a:hover {
-	color: #fff;
-	background-color: hsla(0,0%,100%,.15);
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
 }
 
-p a {
-	color: #fff;
-	text-decoration: none;
-	opacity: .8;
-	-webkit-transition: all .1s linear;
-	transition: all .1s linear;
-	border-bottom: 1px solid hsla(0,0%,100%,.2);
+.contact-line {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.65;
 }
 
- p a:hover {
-	opacity: 1;
-	border-bottom-color: hsla(0,0%,100%,.8);
-}
-	
-.flex-container {
-	color: #fff;
-	min-width: 100%;
-	min-height: 100vh;
-	
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-}
-
-.flex-wrap {
-	background-color: rgba(0,0,0,.85);
-	border-radius: 8px;
-	padding: 32px;
-	max-width: 540px;
-	
+/* ============================================
+   Divider
+   ============================================ */
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--divider) 20%,
+    var(--divider) 80%,
+    transparent
+  );
+  margin: 28px 0;
+  transform-origin: left center;
+  animation: dividerDrawIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
 }
 
-.module-divider {
-	height: 1px;
-	background-color: hsla(0,0%,100%,.2);
-	margin: 24px 0;
+/* ============================================
+   Navigation Links
+   ============================================ */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.links a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px;
+  background: var(--link-bg);
+  border: 1px solid transparent;
+  border-left: 2px solid transparent;
+  border-radius: var(--radius-link);
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.45;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.links a:hover {
+  background: var(--link-bg-hover);
+  border-left-color: var(--accent);
+  color: var(--text-primary);
+  transform: translateX(3px);
+}
+
+.links a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.link-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--accent-dim);
+  flex-shrink: 0;
+  transition: color var(--transition);
+}
+
+.links a:hover .link-icon {
+  color: var(--accent);
+}
+
+/* ============================================
+   Inline Link (E-Mail)
+   ============================================ */
+.contact-line a {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0.85;
+  transition: opacity var(--transition), border-color var(--transition);
+}
+
+.contact-line a:hover {
+  opacity: 1;
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-line a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================
+   Icon Micro-animations
+   ============================================ */
+.links a:hover .link-icon--linkedin {
+  animation: bobY 0.8s ease-in-out infinite;
+}
+
+.links a:hover .link-icon--github {
+  animation: spin360 0.5s ease forwards;
+}
+
+.links a:hover .link-icon--map {
+  animation: scalePing 0.7s ease-in-out infinite;
+}
+
+/* ============================================
+   Animation Keyframes
+   ============================================ */
+@keyframes dividerDrawIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes bobY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+@keyframes spin360 {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scalePing {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.25); }
+}
+
+/* ============================================
+   Responsive – Tablet / Mobile
+   ============================================ */
+@media (max-width: 580px) {
+  .page-wrapper {
+    padding: 24px 16px;
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+
+  .card {
+    padding: 36px 26px 32px;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .profile-photo {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 380px) {
+  .card {
+    padding: 28px 18px 26px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
